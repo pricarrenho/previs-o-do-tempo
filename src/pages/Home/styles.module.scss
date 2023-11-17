@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 4rem;
+  text-align: center;
+  color: $white;
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  @media (min-width: 800px) {
+    font-size: 4.6rem;
+    text-align: start;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: $neutral-100;
+  margin-top: 48px;
+
+  @media (min-width: 800px) {
+    width: 484px;
+  }
+}

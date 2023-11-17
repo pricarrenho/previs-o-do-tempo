@@ -1,0 +1,139 @@
+@import "../../styles/variables.scss";
+
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 24px 24px 24px;
+  background: $white;
+  margin-top: 24px;
+  width: 100%;
+
+  @media (min-width: 800px) {
+    width: 600px;
+    padding: 32px 48px 48px 48px;
+  }
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+
+  button {
+    border: none;
+    background: transparent;
+    color: $dark-yellow;
+    font-size: 2.6rem;
+    cursor: pointer;
+  }
+}
+
+.cityTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: $neutral-500;
+  text-transform: capitalize;
+}
+
+.weatherTitle {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: $neutral-500;
+  padding-bottom: 24px;
+
+  @media (min-width: 800px) {
+    font-size: 3.2rem;
+  }
+}
+
+.cardContents {
+  display: flex;
+  gap: 48px;
+
+  span {
+    font-weight: bold;
+    color: $neutral-600;
+    font-size: 1.2rem;
+
+    @media (min-width: 800px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  p {
+    color: $neutral-500;
+    font-size: 1.2rem;
+
+    @media (min-width: 800px) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 24px;
+}
+
+.maxMinWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.maxMinTemp {
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: $dark-yellow;
+
+  @media (min-width: 800px) {
+    width: 484px;
+  }
+}
+
+.nextDaysContentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+}
+
+.nextDaysContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  p {
+    font-weight: bold;
+    color: $neutral-600;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+
+    @media (min-width: 800px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (min-width: 800px) {
+    flex: 1;
+  }
+}
+
+.nextDaysTemp {
+  display: flex;
+  gap: 8px;
+
+  p {
+    font-weight: bold;
+    color: $dark-yellow;
+  }
+}

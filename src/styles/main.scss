@@ -1,0 +1,17 @@
+@import "./variables.scss";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(0deg, $light-yellow 41%, $dark-yellow 81%);
+  min-height: 100vh;
+}
