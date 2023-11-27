@@ -56,9 +56,9 @@ export function Home() {
                   );
                 })}
 
-              {allCities?.filter(
-                (item) => !item.name.toLowerCase().includes(city.toLowerCase())
-              ) && (
+              {allCities?.filter((item) =>
+                item.name.toLowerCase().includes(city.toLowerCase())
+              ).length === 0 && (
                 <button className={styles.dropdownItem}>
                   Nenhum resultado para <b>{city}</b>
                 </button>
