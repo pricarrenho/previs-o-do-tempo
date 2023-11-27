@@ -1,5 +1,5 @@
 import { weatherApi } from "../weatherApi";
-import { WeatherByCapital } from "./types";
+import { WeatherByCapital, WeatherResponse } from "./types";
 
 export async function getWeatherByCapital(): Promise<
   WeatherByCapital | undefined
@@ -26,7 +26,7 @@ export async function getWeatherByCapital(): Promise<
     const response = await weatherApi.post("", data, { params });
     const responseData = response.data.bulk;
 
-    return responseData.map((item) => ({
+    return responseData.map((item: WeatherResponse) => ({
       id: item.query.custom_id,
       query: item.query.q,
       minTemp: item.query.forecast.forecastday[0].day.mintemp_c,
