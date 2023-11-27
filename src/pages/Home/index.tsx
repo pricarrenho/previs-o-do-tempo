@@ -4,6 +4,7 @@ import { Input } from "../../components/Input";
 import { Table } from "../../components/Table";
 import { useHome } from "./useHome";
 import styles from "./styles.module.scss";
+import { highlight } from "../../utils/highlight";
 
 export function Home() {
   const {
@@ -41,17 +42,27 @@ export function Home() {
                 ?.filter((item) =>
                   item.name.toLowerCase().includes(city.toLowerCase())
                 )
+                .slice(0, 10)
                 .map((item, index) => {
                   return (
                     <button
                       onMouseDown={() => handleSelectCity(item)}
                       className={styles.dropdownItem}
                       key={index + item.name}
-                    >
-                      {item.name}
-                    </button>
+                      dangerouslySetInnerHTML={{
+                        __html: highlight(item.name, city),
+                      }}
+                    ></button>
                   );
                 })}
+
+              {allCities?.filter(
+                (item) => !item.name.toLowerCase().includes(city.toLowerCase())
+              ) && (
+                <button className={styles.dropdownItem}>
+                  Nenhum resultado para <b>{city}</b>
+                </button>
+              )}
             </div>
           )}
         </div>
