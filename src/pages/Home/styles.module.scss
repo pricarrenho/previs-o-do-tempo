@@ -32,3 +32,38 @@
     width: 484px;
   }
 }
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+
+  @media (min-width: 800px) {
+    width: 600px;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  padding: 12px 0px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $neutral-100;
+  }
+}

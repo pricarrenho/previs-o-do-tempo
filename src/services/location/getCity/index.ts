@@ -1,18 +1,43 @@
 import axios from "axios";
+import { CitiesType, CountiesResponse, DistrictsResponse } from "./types";
 
-export async function getCities(value: string) {
-  const newValue = value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/ /g, "-");
+export async function getCities(): Promise<CitiesType[] | undefined> {
+  const countiesUrl =
+    "https://servicodados.ibge.gov.br/api/v1/localidades/municipios";
 
-  const url = `https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${newValue}`;
+  const districtsUrl =
+    "https://servicodados.ibge.gov.br/api/v1/localidades/distritos";
+
+  const promiseCounties = axios.get(countiesUrl);
+  const promiseDistricts = axios.get(districtsUrl);
 
   try {
-    const response = await axios.get(url);
+    const [counties, districts] = await Promise.all([
+      promiseCounties,
+      promiseDistricts,
+    ]);
 
-    return response.data;
+    const countiesFormatted = counties.data.map((item: CountiesResponse) => ({
+      name: item.nome,
+      uf: item.microrregiao.mesorregiao.UF.sigla,
+    }));
+
+    const districtsFormatted = districts.data.map(
+      (item: DistrictsResponse) => ({
+        name: item.nome,
+        uf: item.municipio.microrregiao.mesorregiao.UF.sigla,
+      })
+    );
+
+    const result: CitiesType[] = [];
+
+    [...countiesFormatted, ...districtsFormatted].forEach((item) => {
+      if (result.filter((value) => value?.name === item.name).length) return;
+
+      result.push(item);
+    });
+
+    return result;
   } catch (error) {
     console.error(error);
   }

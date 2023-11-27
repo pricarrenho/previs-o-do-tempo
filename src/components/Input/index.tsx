@@ -9,6 +9,8 @@ export function Input({
   type,
   rightIcon,
   onChange,
+  onFocus,
+  onBlur,
 }: InputProps) {
   const icons = {
     search: <FaSearch color="#505050" size={18} />,
@@ -21,9 +23,12 @@ export function Input({
         id={name}
         name={name}
         placeholder={placeholder}
+        autoComplete="off"
         className={styles.input}
         value={value}
         onChange={(event) => onChange(event.target.value)}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
 
       {rightIcon && (

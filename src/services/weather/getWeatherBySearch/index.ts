@@ -1,8 +1,12 @@
 import { weatherApi } from "../weatherApi";
+import { CardData, getWeatherBySearchProps } from "./types";
 
-export async function getWeatherBySearch(value: string) {
+export async function getWeatherBySearch({
+  name,
+  uf,
+}: getWeatherBySearchProps): Promise<CardData | undefined> {
   const params = {
-    q: value,
+    q: name,
     days: 6,
     aqi: "no",
     alerts: "no",
@@ -12,6 +16,8 @@ export async function getWeatherBySearch(value: string) {
     const response = await weatherApi.get("", { params });
 
     return {
+      name: name,
+      uf: uf,
       currentWeather: response.data.current.temp_c.toFixed(0),
       weatherCondition: response.data.current.condition.text,
       maxTemp: response.data.forecast.forecastday[0].day.maxtemp_c.toFixed(0),

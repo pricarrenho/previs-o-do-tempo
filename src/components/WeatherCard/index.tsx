@@ -4,18 +4,15 @@ import { CardProps } from "./types";
 import { FaTimes } from "react-icons/fa";
 import { dayOfTheWeek } from "../../utils/date";
 import styles from "./styles.module.scss";
-import { useWeatherCard } from "./useWeatherCard";
 
 export function WeatherCard({ value, handleCloseCard }: CardProps) {
-  const { cardData, state } = useWeatherCard(value);
-
-  if (value.length < 2 || !cardData) return <></>;
+  if (!value) return <></>;
 
   return (
     <div className={styles.cardWrapper}>
       <div className={styles.titleContainer}>
         <p className={styles.cityTitle}>
-          {value}, {state} - Brasil
+          {value.name}, {value.uf} - Brasil
         </p>
 
         <button onClick={handleCloseCard}>
@@ -24,33 +21,33 @@ export function WeatherCard({ value, handleCloseCard }: CardProps) {
       </div>
 
       <p className={styles.weatherTitle}>
-        {`${cardData.currentWeather}º ${cardData.weatherCondition}`}
+        {`${value.currentWeather}º ${value.weatherCondition}`}
       </p>
 
       <div className={styles.cardContents}>
         <div className={styles.cardContent}>
           <div className={styles.maxMinWrapper}>
             <span className={styles.maxMinTemp}>
-              <FaLongArrowAltDown color="#ff8000" /> {cardData.minTemp}º
+              <FaLongArrowAltDown color="#ff8000" /> {value.minTemp}º
             </span>
 
             <span className={styles.maxMinTemp}>
-              <FaLongArrowAltUp color="#ff8000" /> {cardData.maxTemp}º
+              <FaLongArrowAltUp color="#ff8000" /> {value.maxTemp}º
             </span>
           </div>
 
           <p>
-            Vento <span>{cardData.wind} km/h</span>
+            Vento <span>{value.wind} km/h</span>
           </p>
         </div>
 
         <div className={styles.cardContent}>
           <p>
-            Sensação <span>{cardData.tempSensation}ºC</span>
+            Sensação <span>{value.tempSensation}ºC</span>
           </p>
 
           <p>
-            Umidade <span>{cardData.humidity}%</span>
+            Umidade <span>{value.humidity}%</span>
           </p>
         </div>
       </div>
@@ -58,7 +55,7 @@ export function WeatherCard({ value, handleCloseCard }: CardProps) {
       <div className={styles.divider}></div>
 
       <div className={styles.nextDaysContentWrapper}>
-        {cardData.nextFiveDays.map((item, index) => {
+        {value.nextFiveDays.map((item, index) => {
           if (index === 0) return;
 
           return (
