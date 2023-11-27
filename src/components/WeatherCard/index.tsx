@@ -1,43 +1,13 @@
 import { FaLongArrowAltDown } from "react-icons/fa";
 import { FaLongArrowAltUp } from "react-icons/fa";
-import { CardData, CardProps } from "./types";
-import { useEffect, useState } from "react";
-import { getWeatherBySearch } from "../../services/weather/getWeatherBySearch";
+import { CardProps } from "./types";
 import { FaTimes } from "react-icons/fa";
+import { dayOfTheWeek } from "../../utils/date";
 import styles from "./styles.module.scss";
-import { getCities } from "../../services/location/getCity";
+import { useWeatherCard } from "./useWeatherCard";
 
-export function Card({ value, handleCloseCard }: CardProps) {
-  const [cardData, setCardData] = useState<CardData>();
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-
-  const searchCity = async (value: string) => {
-    const data = await getCities(value);
-    setCity(data.nome);
-
-    setState(data.microrregiao?.mesorregiao?.UF.sigla);
-  };
-
-  const searchWeather = async (value: string) => {
-    const data = await getWeatherBySearch(value);
-    setCardData(data);
-  };
-
-  useEffect(() => {
-    searchCity(value);
-    searchWeather(city);
-  }, [value, city]);
-
-  const dayOfTheWeek = (value: string) => {
-    const nameOfTheDay = new Intl.DateTimeFormat(["pt-br"], {
-      weekday: "long",
-    }).format(new Date(`${value} 00:00:00`));
-
-    const newNameOfTheDay = nameOfTheDay.replace("-feira", "");
-
-    return newNameOfTheDay;
-  };
+export function WeatherCard({ value, handleCloseCard }: CardProps) {
+  const { cardData, state } = useWeatherCard(value);
 
   if (value.length < 2 || !cardData) return <></>;
 

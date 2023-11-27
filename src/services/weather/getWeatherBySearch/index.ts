@@ -6,7 +6,6 @@ export async function getWeatherBySearch(value: string) {
     days: 6,
     aqi: "no",
     alerts: "no",
-    lang: "pt",
   };
 
   try {

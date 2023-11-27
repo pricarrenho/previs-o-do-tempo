@@ -24,8 +24,14 @@ export async function getWeatherByCapital(): Promise<
 
   try {
     const response = await weatherApi.post("", data, { params });
+    const responseData = response.data.bulk;
 
-    return response.data.bulk;
+    return responseData.map((item) => ({
+      id: item.query.custom_id,
+      query: item.query.q,
+      minTemp: item.query.forecast.forecastday[0].day.mintemp_c,
+      maxTemp: item.query.forecast.forecastday[0].day.maxtemp_c,
+    }));
   } catch (error) {
     console.error(error);
   }

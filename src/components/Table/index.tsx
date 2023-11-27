@@ -1,20 +1,8 @@
-import { useEffect, useState } from "react";
-import { getWeatherByCapital } from "../../services/weather/getWeatherByCapital";
-import { WeatherByCapital } from "../../services/weather/getWeatherByCapital/types";
+import { useTable } from "./useTable";
 import styles from "./styles.module.scss";
 
 export function Table() {
-  const [cities, setCities] = useState<WeatherByCapital>();
-
-  const initTable = async () => {
-    const data = await getWeatherByCapital();
-
-    setCities(data);
-  };
-
-  useEffect(() => {
-    initTable();
-  }, []);
+  const { cities } = useTable();
 
   if (!cities?.length) {
     return <></>;
@@ -38,14 +26,10 @@ export function Table() {
             {cities
               .map((city) => {
                 return (
-                  <tr key={city.query.custom_id}>
-                    <td>{`${city.query.forecast.forecastday[0].day.mintemp_c.toFixed(
-                      0
-                    )}º`}</td>
-                    <td>{`${city.query.forecast.forecastday[0].day.maxtemp_c.toFixed(
-                      0
-                    )}º`}</td>
-                    <td>{city.query.q}</td>
+                  <tr key={city.id}>
+                    <td>{`${city.minTemp.toFixed(0)}º`}</td>
+                    <td>{`${city.maxTemp.toFixed(0)}º`}</td>
+                    <td>{city.query}</td>
                   </tr>
                 );
               })
@@ -66,14 +50,10 @@ export function Table() {
             {cities
               .map((city) => {
                 return (
-                  <tr key={city.query.custom_id}>
-                    <td>{`${city.query.forecast.forecastday[0].day.mintemp_c.toFixed(
-                      0
-                    )}º`}</td>
-                    <td>{`${city.query.forecast.forecastday[0].day.maxtemp_c.toFixed(
-                      0
-                    )}º`}</td>
-                    <td>{city.query.q}</td>
+                  <tr key={city.id}>
+                    <td>{`${city.minTemp.toFixed(0)}º`}</td>
+                    <td>{`${city.maxTemp.toFixed(0)}º`}</td>
+                    <td>{city.query}</td>
                   </tr>
                 );
               })
