@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { CitiesType } from "../../services/location/getCity/types";
 import { getWeatherBySearch } from "../../services/weather/getWeatherBySearch";
 import { CardData } from "../../services/weather/getWeatherBySearch/types";
 
@@ -19,21 +18,29 @@ const capitals = [
 export const useTable = () => {
   const [cities, setCities] = useState<CardData[]>([]);
 
-  const initTable = async (value: CitiesType) => {
-    const data = await getWeatherBySearch(value);
-
-    if (data) {
-      setCities((prevCities) => [...prevCities, data]);
-    }
-  };
-
   useEffect(() => {
-    capitals.forEach((capital) => {
-      initTable(capital);
-    });
-  }, []);
+    const fetchData = async () => {
+      const cityDataPromises = capitals.map((capital) =>
+        getWeatherBySearch(capital)
+      );
 
-  console.log(cities);
+      console.log(cityDataPromises);
+
+      const cityData = await Promise.all(cityDataPromises);
+
+      console.log(cityData);
+
+      const filteredData = cityData.filter(
+        (data): data is CardData => data !== undefined
+      );
+
+      if (filteredData.length > 0) {
+        setCities(filteredData);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return { cities };
 };

@@ -4,12 +4,6 @@ import styles from "./styles.module.scss";
 export function Table() {
   const { cities } = useTable();
 
-  if (!cities?.length) {
-    return <></>;
-  }
-
-  console.log(cities);
-
   return (
     <div className={styles.container}>
       <h2 className={styles.subtitle}>Capitais</h2>
