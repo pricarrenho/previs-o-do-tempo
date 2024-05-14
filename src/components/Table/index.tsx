@@ -8,6 +8,8 @@ export function Table() {
     return <></>;
   }
 
+  console.log(cities);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.subtitle}>Capitais</h2>
@@ -26,10 +28,10 @@ export function Table() {
             {cities
               .map((city) => {
                 return (
-                  <tr key={city.id}>
-                    <td>{`${city.minTemp.toFixed(0)}º`}</td>
-                    <td>{`${city.maxTemp.toFixed(0)}º`}</td>
-                    <td>{city.query}</td>
+                  <tr key={city.name}>
+                    <td>{`${city.minTemp}º`}</td>
+                    <td>{`${city.maxTemp}º`}</td>
+                    <td>{city.name}</td>
                   </tr>
                 );
               })
@@ -50,10 +52,10 @@ export function Table() {
             {cities
               .map((city) => {
                 return (
-                  <tr key={city.id}>
-                    <td>{`${city.minTemp.toFixed(0)}º`}</td>
-                    <td>{`${city.maxTemp.toFixed(0)}º`}</td>
-                    <td>{city.query}</td>
+                  <tr key={city.name}>
+                    <td>{`${city.minTemp}º`}</td>
+                    <td>{`${city.maxTemp}º`}</td>
+                    <td>{city.name}</td>
                   </tr>
                 );
               })
