@@ -24,11 +24,7 @@ export const useTable = () => {
         getWeatherBySearch(capital)
       );
 
-      console.log(cityDataPromises);
-
       const cityData = await Promise.all(cityDataPromises);
-
-      console.log(cityData);
 
       const filteredData = cityData.filter(
         (data): data is CardData => data !== undefined
