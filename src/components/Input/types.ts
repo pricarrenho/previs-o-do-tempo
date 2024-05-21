@@ -9,4 +9,5 @@ export type InputProps = {
   onChange: (value: string) => void;
   onFocus: () => void;
   onBlur: () => void;
+  onClear: (value: string) => void;
 };

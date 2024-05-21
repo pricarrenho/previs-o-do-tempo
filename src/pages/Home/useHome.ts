@@ -25,8 +25,6 @@ export const useHome = () => {
     setIsFetchingCities(false);
   }, [allCities, isFetchingCities]);
 
-  console.log(allCities);
-
   useEffect(() => {
     getAllCities();
   }, [getAllCities]);

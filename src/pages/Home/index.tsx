@@ -34,6 +34,7 @@ export function Home() {
             onChange={setCity}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            onClear={setCity}
           />
 
           {showDropdown && (

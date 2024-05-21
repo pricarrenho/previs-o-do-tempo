@@ -29,3 +29,14 @@
   transform: translateY(50%);
   right: 20px;
 }
+
+.mudarNome {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  right: 80px;
+
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
