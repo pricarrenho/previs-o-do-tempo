@@ -50,7 +50,7 @@ export function Home() {
                       className={styles.dropdownItem}
                       key={index + item.name}
                       dangerouslySetInnerHTML={{
-                        __html: highlight(item.name, city),
+                        __html: highlight(`${item.name} - ${item.uf}`, city),
                       }}
                     ></button>
                   );
