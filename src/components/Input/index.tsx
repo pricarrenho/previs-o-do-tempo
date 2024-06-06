@@ -8,16 +8,31 @@ export function Input({
   placeholder,
   name,
   type,
-  rightIcon,
   onChange,
   onFocus,
   onBlur,
   onClear,
 }: InputProps) {
-  const icons = {
-    search: <FaSearch color="#505050" size={18} />,
-    clear: <IoClose color="#505050" size={20} />,
+  const renderClear = () => (
+    <button className={styles.inputButtonClear} onClick={() => onClear("")}>
+      <IoClose color="#505050" size={20} />
+    </button>
+  );
+
+  const renderSearch = () => (
+    <div className={styles.inputIcon}>
+      <FaSearch color="#505050" size={18} />
+    </div>
+  );
+
+  const currentInput = {
+    clear: renderClear,
+    search: renderSearch,
   };
+
+  const isInputFilled = value.length > 0;
+
+  const inputStatus = isInputFilled ? "clear" : "search";
 
   return (
     <div className={styles.inputContainer}>
@@ -34,15 +49,7 @@ export function Input({
         onBlur={onBlur}
       />
 
-      {value.length > 1 && (
-        <button className={styles.mudarNome} onClick={() => onClear("")}>
-          {icons.clear}
-        </button>
-      )}
-
-      {rightIcon && (
-        <div className={styles.iconContainer}>{icons[rightIcon]}</div>
-      )}
+      {currentInput[inputStatus]()}
     </div>
   );
 }

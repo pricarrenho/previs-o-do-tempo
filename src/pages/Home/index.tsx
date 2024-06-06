@@ -29,7 +29,6 @@ export function Home() {
             name="search"
             type="text"
             placeholder="Insira aqui o nome da cidade"
-            rightIcon="search"
             value={city}
             onChange={setCity}
             onFocus={handleInputFocus}
