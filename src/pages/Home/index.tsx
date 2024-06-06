@@ -67,11 +67,15 @@ export function Home() {
           )}
         </div>
 
-        <WeatherCard value={selectedCity} handleCloseCard={handleCloseCard} />
+        {selectedCity ? (
+          <WeatherCard value={selectedCity} handleCloseCard={handleCloseCard} />
+        ) : (
+          <>
+            <div className={styles.divider}></div>
 
-        <div className={styles.divider}></div>
-
-        <Table />
+            <Table />
+          </>
+        )}
       </div>
     </Container>
   );
